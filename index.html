@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwachhTrack | Smart Sanitation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">♻ SwachhTrack</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#report">Report Issue</a>
+            <a href="#dashboard">Dashboard</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div>
+            <p class="tag">SMART CITY • CLEAN CITY</p>
+            <h1>Let's Make Our<br><span>City Cleaner.</span></h1>
+            <p>
+                Report garbage, overflowing bins and blocked drains.
+                Help your community build a cleaner and healthier environment.
+            </p>
+            <a href="#report" class="btn">Report an Issue</a>
+        </div>
+        <div class="hero-icon">🌍</div>
+    </section>
+
+    <section class="stats">
+        <div class="stat-card">
+            <h2 id="totalCount">0</h2>
+            <p>Total Reports</p>
+        </div>
+        <div class="stat-card">
+            <h2 id="pendingCount">0</h2>
+            <p>Pending</p>
+        </div>
+        <div class="stat-card">
+            <h2 id="resolvedCount">0</h2>
+            <p>Resolved</p>
+        </div>
+    </section>
+
+    <section class="report-section" id="report">
+        <h2>Report a Sanitation Issue</h2>
+        <p class="section-desc">Help us identify and solve local problems.</p>
+
+        <form id="reportForm">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+
+            <label for="location">Location</label>
+            <input type="text" id="location" placeholder="Enter area or landmark" required>
+
+            <label for="category">Issue Category</label>
+            <select id="category" required>
+                <option value="">Select an issue</option>
+                <option>Garbage Accumulation</option>
+                <option>Overflowing Dustbin</option>
+                <option>Blocked Drain</option>
+                <option>Illegal Waste Dumping</option>
+            </select>
+
+            <label for="description">Description</label>
+            <textarea id="description" placeholder="Describe the issue..." required></textarea>
+
+            <label for="photo">Upload Issue Photo (optional)</label>
+            <input type="file" id="photo" accept="image/*">
+
+            <button type="submit" class="btn">Submit Report</button>
+        </form>
+
+        <p id="message"></p>
+    </section>
+
+    <section class="dashboard" id="dashboard">
+        <h2>Municipal Dashboard</h2>
+        <p class="section-desc">Track and manage reported sanitation issues.</p>
+
+        <div class="filter">
+            <input type="text" id="searchInput" placeholder="Search by ID, name or location">
+            <select id="statusFilter">
+                <option value="All">All Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Resolved">Resolved</option>
+            </select>
+        </div>
+
+        <div id="complaintList" class="complaint-list"></div>
+    </section>
+
+    <footer>
+        <h3>♻ SwachhTrack</h3>
+        <p>Technology for a cleaner and healthier tomorrow.</p>
+        <p>HackKumbh 2026 | Prototype</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

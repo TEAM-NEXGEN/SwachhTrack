@@ -2,105 +2,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SwachhTrack | Smart Sanitation</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SwachhTrack | Smart City Cleanliness</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
+
 <body>
+  <header class="navbar">
+    <a href="#" class="logo"><span class="logo-icon">♻</span> Swachh<span>Track</span></a>
 
-    <header>
-        <div class="logo">♻ SwachhTrack</div>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#report">Report Issue</a>
-            <a href="#dashboard">Dashboard</a>
-        </nav>
-    </header>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#report">Report</a>
+      <a href="#map-section">Live Map</a>
+      <a href="#dashboard">Dashboard</a>
+    </nav>
 
-    <section class="hero" id="home">
+    <button class="nav-btn" onclick="document.getElementById('report').scrollIntoView({behavior:'smooth'})">
+      Report Issue ↗
+    </button>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <span class="eyebrow">SMARTER CITIES · CLEANER FUTURES</span>
+      <h1>A cleaner city<br>starts <span>with you.</span></h1>
+      <p>Report sanitation issues, locate them on the map, and follow their progress. Your voice can help build a cleaner community.</p>
+
+      <div class="hero-actions">
+        <a class="primary-btn" href="#report">Report an Issue ↗</a>
+        <a class="outline-btn" href="#map-section">Explore Map ↓</a>
+      </div>
+
+      <div class="hero-note">🌱 Community-powered cleanliness</div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="visual-circle circle1"></div>
+      <div class="visual-circle circle2"></div>
+      <div class="visual-plant">🌳</div>
+      <div class="visual-city">🏙️</div>
+      <div class="visual-clean">🌿</div>
+      <div class="visual-card">
+        <span>🌎</span>
+        <div><strong>Make an impact</strong><small>One report at a time</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats section">
+    <div class="section-heading">
+      <span class="eyebrow">COMMUNITY IMPACT</span>
+      <h2>Progress, made together.</h2>
+    </div>
+
+    <div class="stats-grid">
+      <article class="stat-card total"><span>Total Reports</span><h2 id="totalCount">0</h2><p>Community submissions</p></article>
+      <article class="stat-card pending"><span>Pending</span><h2 id="pendingCount">0</h2><p>Awaiting action</p></article>
+      <article class="stat-card resolved"><span>Resolved</span><h2 id="resolvedCount">0</h2><p>Marked completed</p></article>
+    </div>
+  </section>
+
+  <section class="report-section section" id="report">
+    <div class="report-info">
+      <span class="eyebrow">CITIZEN PARTICIPATION</span>
+      <h2>See something?<br><span>Report it.</span></h2>
+      <p>Help identify areas that need attention. Every report gives the community a better view of local sanitation issues.</p>
+      <ul>
+        <li>✓ Submit an issue in seconds</li>
+        <li>✓ Pin its location on the map</li>
+        <li>✓ Track status updates</li>
+      </ul>
+    </div>
+
+    <form id="reportForm" class="form-card">
+      <h3>Submit a Report</h3>
+      <p class="form-subtitle">Provide details about the issue.</p>
+
+      <div class="form-row">
         <div>
-            <p class="tag">SMART CITY • CLEAN CITY</p>
-            <h1>Let's Make Our<br><span>City Cleaner.</span></h1>
-            <p>
-                Report garbage, overflowing bins and blocked drains.
-                Help your community build a cleaner and healthier environment.
-            </p>
-            <a href="#report" class="btn">Report an Issue</a>
+          <label for="name">Your name</label>
+          <input id="name" required maxlength="60" placeholder="Enter your name">
         </div>
-        <div class="hero-icon">🌍</div>
-    </section>
-
-    <section class="stats">
-        <div class="stat-card">
-            <h2 id="totalCount">0</h2>
-            <p>Total Reports</p>
+        <div>
+          <label for="location">Area / Street</label>
+          <input id="location" required maxlength="120" placeholder="Enter location">
         </div>
-        <div class="stat-card">
-            <h2 id="pendingCount">0</h2>
-            <p>Pending</p>
-        </div>
-        <div class="stat-card">
-            <h2 id="resolvedCount">0</h2>
-            <p>Resolved</p>
-        </div>
-    </section>
+      </div>
 
-    <section class="report-section" id="report">
-        <h2>Report a Sanitation Issue</h2>
-        <p class="section-desc">Help us identify and solve local problems.</p>
+      <label for="category">Issue category</label>
+      <select id="category" required>
+        <option value="">Choose category</option>
+        <option>Garbage Dump</option>
+        <option>Overflowing Dustbin</option>
+        <option>Blocked Drain</option>
+        <option>Water Logging</option>
+        <option>Public Toilet Hygiene</option>
+        <option>Street Cleaning</option>
+        <option>Other</option>
+      </select>
 
-        <form id="reportForm">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" placeholder="Enter your name" required>
+      <label for="description">Description</label>
+      <textarea id="description" required maxlength="1000" rows="4" placeholder="Describe the problem..."></textarea>
 
-            <label for="location">Location</label>
-            <input type="text" id="location" placeholder="Enter area or landmark" required>
+      <div class="location-controls">
+        <button type="button" id="gpsBtn" class="location-btn">◎ Use my GPS location</button>
+        <p id="locationStatus">You can also select a location by clicking on the map below.</p>
+      </div>
 
-            <label for="category">Issue Category</label>
-            <select id="category" required>
-                <option value="">Select an issue</option>
-                <option>Garbage Accumulation</option>
-                <option>Overflowing Dustbin</option>
-                <option>Blocked Drain</option>
-                <option>Illegal Waste Dumping</option>
-            </select>
+      <div class="coordinates">
+        <span>Latitude</span><strong id="latDisplay">Not selected</strong>
+        <span>Longitude</span><strong id="lngDisplay">Not selected</strong>
+      </div>
 
-            <label for="description">Description</label>
-            <textarea id="description" placeholder="Describe the issue..." required></textarea>
+      <button class="submit-btn" type="submit">Submit Report ↗</button>
+      <p class="form-note">Reports are shared with connected SwachhTrack users.</p>
+    </form>
+  </section>
 
-            <label for="photo">Upload Issue Photo (optional)</label>
-            <input type="file" id="photo" accept="image/*">
+  <section class="map-section section" id="map-section">
+    <div class="section-heading map-heading">
+      <div>
+        <span class="eyebrow">LOCATION INTELLIGENCE</span>
+        <h2>Issues around the city.</h2>
+        <p>Choose a location on the map or explore existing reports.</p>
+      </div>
+      <button id="gpsMapBtn" class="location-btn">◎ Find my location</button>
+    </div>
 
-            <button type="submit" class="btn">Submit Report</button>
-        </form>
+    <div id="map"></div>
+    <div class="map-legend">
+      <span><i class="dot dot-pending"></i> Pending</span>
+      <span><i class="dot dot-progress"></i> In Progress</span>
+      <span><i class="dot dot-resolved"></i> Resolved</span>
+    </div>
+  </section>
 
-        <p id="message"></p>
-    </section>
+  <section class="dashboard-section section" id="dashboard">
+    <div class="section-heading dashboard-heading">
+      <div>
+        <span class="eyebrow">LIVE COMMUNITY DASHBOARD</span>
+        <h2>Reports that matter.</h2>
+        <p>Shared reports from the community.</p>
+      </div>
+      <span class="live-label">● LIVE DATA</span>
+    </div>
 
-    <section class="dashboard" id="dashboard">
-        <h2>Municipal Dashboard</h2>
-        <p class="section-desc">Track and manage reported sanitation issues.</p>
+    <div class="filters">
+      <input type="search" id="searchInput" placeholder="Search by location or issue...">
+      <select id="statusFilter">
+        <option value="All">All statuses</option>
+        <option value="Pending">Pending</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Resolved">Resolved</option>
+      </select>
+      <select id="categoryFilter">
+        <option value="All">All categories</option>
+        <option>Garbage Dump</option>
+        <option>Overflowing Dustbin</option>
+        <option>Blocked Drain</option>
+        <option>Water Logging</option>
+        <option>Public Toilet Hygiene</option>
+        <option>Street Cleaning</option>
+        <option>Other</option>
+      </select>
+    </div>
 
-        <div class="filter">
-            <input type="text" id="searchInput" placeholder="Search by ID, name or location">
-            <select id="statusFilter">
-                <option value="All">All Statuses</option>
-                <option value="Pending">Pending</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Resolved">Resolved</option>
-            </select>
-        </div>
+    <div id="complaintList" class="report-grid"></div>
+  </section>
 
-        <div id="complaintList" class="complaint-list"></div>
-    </section>
+  <section class="admin-section section" id="admin">
+    <div class="admin-card">
+      <div>
+        <span class="eyebrow">AUTHORIZED PERSONNEL</span>
+        <h2>Municipal Admin</h2>
+        <p>Sign in to manage report statuses.</p>
+      </div>
 
-    <footer>
-        <h3>♻ SwachhTrack</h3>
-        <p>Technology for a cleaner and healthier tomorrow.</p>
-        <p>HackKumbh 2026 | Prototype</p>
-    </footer>
+      <div id="loginArea">
+        <input id="adminEmail" type="email" placeholder="Admin email">
+        <input id="adminPassword" type="password" placeholder="Password">
+        <button id="loginBtn" class="primary-btn">Admin Login</button>
+      </div>
 
-    <script src="script.js"></script>
+      <div id="adminInfo" hidden>
+        <p id="adminWelcome"></p>
+        <button id="logoutBtn" class="location-btn">Log Out</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <a href="#" class="logo">♻ Swachh<span>Track</span></a>
+    <p>Cleaner streets. Stronger communities. Better tomorrow.</p>
+    <small>© 2026 SwachhTrack · Community Civic Platform</small>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>

@@ -464,7 +464,7 @@ onAuthStateChanged(auth, user => {
   currentUser = user;
 
   // The same admin email must be used in Firestore rules below.
-  isAdmin = !!user && user.email === "admin@swachhtrack.in";
+  isAdmin = !!user && user.email === "wadnarearyansh@gmail.com";
 
   loginArea.hidden = isAdmin;
   adminInfo.hidden = !isAdmin;

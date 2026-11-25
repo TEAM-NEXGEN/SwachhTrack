@@ -3,7 +3,7 @@ SwachhTrack is a web-based cleanliness reporting platform that helps
 citizens report sanitation issues, choose a location using GPS or an
 interactive map, and follow the progress of submitted reports.
 
-🌐 Live Website: https://team-nexgen.github.io/SwachhTrack/\
+🌐 Live Website: https://team-nexgen.github.io/SwachhTrack/
 📁 GitHub Repository: https://github.com/TEAM-NEXGEN/SwachhTrack
 Features
 - Submit cleanliness complaints with name, location, category, and

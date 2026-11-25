@@ -28,21 +28,6 @@ Leaflet.js                Interactive map
 OpenStreetMap             Map tiles
 GitHub Pages              Website hosting
 
-Run Locally
-1. Clone this repository:
-   git clone https://github.com/TEAM-NEXGEN/SwachhTrack.git
-2. Open the downloaded SwachhTrack folder in Visual Studio Code.
-3. Configure Firebase in script.js using your own Firebase project's
-   web-app configuration.
-4. In Firebase Console, enable Email/Password under Authentication
-   and create a Cloud Firestore database.
-5. Configure Firestore security rules to allow report creation and
-   reading while restricting status updates to an authorized
-   administrator.
-6. Open index.html with the VS Code Live Server extension.
-GPS access generally requires HTTPS or localhost and the user's
-permission.
-
 Admin Access
 The administrator signs in through Firebase Authentication. The
 administrator email used in the application must match the email
